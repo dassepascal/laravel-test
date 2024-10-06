@@ -1,0 +1,9 @@
+rappel:
+model  Property
+migration table properties
+controller : php artisan make:controller  Admin\\PropertyController -r (resource:create,delelte...)
+request : Admin PropertyRequestForm
+
+
+
+
