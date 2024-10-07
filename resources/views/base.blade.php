@@ -9,11 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     {{-- bootstrap js --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    {{-- tom-select --}}
-<link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+   
 
-     <title>@yield('title' | Administration)</title>
+     <title>@yield('title' )</title>
 </head>
 <body>
 
@@ -30,11 +28,9 @@
             <ul class="navbar-nav">
                 
                  <li class="nav-item">
-                <a @class(['nav-link','active' => str_contains($route,'property.')]) href="{{ route('admin.property.index') }}">Gérer les biens</a>
+                <a @class(['nav-link','active' => str_contains($route,'property.')]) href="#">Gérer les biens</a>
               </li>
-                 <li class="nav-item">
-                <a @class(['nav-link','active' => str_contains($route,'option.')]) href="{{ route('admin.option.index') }}">Gérer les options</a>
-              </li>
+               
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
@@ -42,23 +38,12 @@
         </div>
     </div>
 </nav>
-<div class="container mt-5">
-    @if ($errors->any())
-<div class="alert alert-danger">
-    <ul class="list-group">
-        @foreach ($errors->all() as $error)
-        <li class="list-group-item">{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-@include('shared.flash')
-
+<div>
+    
     @yield('content')
 </div> 
 
-<script >
-new TomSelect('select[multiple]',{plugins: {remove_button:{title:'Supprimer'}}})
-</script>
+
 </body>
 </html>
+
