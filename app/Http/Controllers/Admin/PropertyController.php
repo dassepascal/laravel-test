@@ -68,7 +68,7 @@ class PropertyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Property $property)
+    public function update(PropertyFormRequest $request, Property $property)
     {
         $property->update($request->validated());
         return to_route('admin.property.index')->with('success', 'Le bien a été mis à jour avec succés');
@@ -77,8 +77,9 @@ class PropertyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Property $property)
     {
-        //
+        $property->delete();
+        return to_route('admin.property.index')->with('success', 'Le bien a été supprimé avec succés');
     }
 }
