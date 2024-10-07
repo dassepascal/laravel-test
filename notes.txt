@@ -5,5 +5,7 @@ controller : php artisan make:controller  Admin\\PropertyController -r (resource
 request : Admin PropertyRequestForm
 
 
+creation de larelation entre la table property et option relation many_to_many
+php artisan make:migration CreateOptionPropertyTable
 
 
