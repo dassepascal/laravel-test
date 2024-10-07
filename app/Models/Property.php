@@ -13,8 +13,7 @@ class Property extends Model
 
     protected $fillable = [
         'title',
-        'slug', //slug = url friendly
-        'description',
+         'description',
         'surface'  ,
         'rooms' ,
         'bedrooms',

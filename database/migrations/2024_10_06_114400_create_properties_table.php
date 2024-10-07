@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug')->nullable();//slug = url friendly
+           
             $table->longText('description');
             $table->integer('surface');
             $table->integer('rooms');

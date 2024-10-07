@@ -2,7 +2,7 @@
    
     $type ??= 'text';
     $class ??= null;
-    $name ??=null;
+    $name ??='';
      $label ??= ucfirst($name);
     
    
