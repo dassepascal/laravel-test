@@ -31,3 +31,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('property', PropertyController::class)->except(['show']);
     Route::resource('option', OptionController::class)->except(['show']);
 });
+
+Route::get('/test', function () {
+    return view('test');
+});
