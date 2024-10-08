@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\Admin\OptionController;
-use App\Http\Controllers\Admin\PropertyController;
 
 /*
 |--------------------------------------------------------------------------
