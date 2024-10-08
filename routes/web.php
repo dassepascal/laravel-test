@@ -16,14 +16,18 @@ use App\Http\Controllers\Admin\PropertyController;
 |
 */
 
-
+$idRedex = '[0-9]+';
+$slugRegex = '[a-z0-9-]+';
 Route::get('/', [HomeController::class, 'index']);
 
+Route::get('/biens', [PropertyController::class, 'index'])->name('property.index');
+Route::get('/biens/{property}', [PropertyController::class, 'show'])->name('property.show')->where([
+    'id' => $idRedex,
+    'slug' => $slugRegex
+]);
 
-Route::prefix('admin')-> name ('admin.')->group(function (){
+
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('property', PropertyController::class)->except(['show']);
     Route::resource('option', OptionController::class)->except(['show']);
-
 });
-
-
