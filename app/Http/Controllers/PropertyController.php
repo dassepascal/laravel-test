@@ -27,7 +27,8 @@ class PropertyController extends Controller
         }
         $properties = Property::paginate(16);
         return view('properties.index', [
-            'properties' => $properties
+            'properties' => $query->paginate(16),
+            'input'=> $request->validated()
         ]);
     }
 
