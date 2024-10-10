@@ -17,14 +17,22 @@
         <div class="mt-4">
             <h4>Intéressé par ce bien</h4>
 
-            <form action="#" method="post" class="vstack gap-3">
+             {{-- si message flash masquer le bien  --}}
+            @include('shared.flash')
+            <form action="{{ route('property.contact', $property) }}" method="post" class="vstack gap-3">
                 @csrf
                 <div class="row">
-                    @include('shared.input', ['class' => 'col', 'name' => 'lastname', 'label' => 'Nom'])
+                    @include('shared.input', [
+                        'class' => 'col',
+                        'name' => 'lastname',
+                        'label' => 'Nom',
+                       
+                    ])
                     @include('shared.input', [
                         'class' => 'col',
                         'name' => 'firstname',
                         'label' => 'Prénom',
+                        
                     ])
                 </div>
                 <div class="row">
@@ -33,11 +41,17 @@
                         'class' => 'col',
                         'name' => 'email',
                         'label' => 'Email',
+                        
                     ])
-                  
 
-           
-                    @include('shared.input', ['class' => 'col', 'name' => 'phone', 'label' => 'Téléphone'])
+
+
+                    @include('shared.input', [
+                        'class' => 'col',
+                        'name' => 'phone',
+                        'label' => 'Téléphone',
+                        
+                    ])
 
                 </div>
                 @include('shared.input', ['name' => 'message', 'label' => 'Message'])
@@ -49,7 +63,8 @@
             </form>
         </div>
         <div class="mt-4">
-            {{-- si on fait confiance à l'utilisateur on peut encadrer le texte avec !! :  <p>{{ !! nl2br($property->description) !! }}</p>--}}
+            // TODO {{-- si on fait confiance à l'utilisateur on peut encadrer le texte avec !! :  <p>{{ !! nl2br($property->description) !! }}</p> --}}
+
             <p>{{ nl2br($property->description) }}</p>
             <div class="row">
                 <div class="col-8">
@@ -60,35 +75,34 @@
                             <td>{{ $property->surface }} m²</td>
                         </tr>
                         <tr>
-                             <td>Pièces</td>
+                            <td>Pièces</td>
                             <td>{{ $property->rooms }} </td>
                         </tr>
-                         <tr>
-                             <td>Chambres</td>
+                        <tr>
+                            <td>Chambres</td>
                             <td>{{ $property->bedrooms }} </td>
                         </tr>
-                          <tr>
-                             <td>Etage</td>
-                            <td>{{ $property->floor ? :'Rez de chaussé' }} </td>
+                        <tr>
+                            <td>Etage</td>
+                            <td>{{ $property->floor ?: 'Rez de chaussé' }} </td>
                         </tr>
-                          <tr>
-                             <td>Localisation</td>
+                        <tr>
+                            <td>Localisation</td>
                             <td>{{ $property->address }} <br>
-                            {{ $property->city }} - {{ $property->code_postal }}
+                                {{ $property->city }} - {{ $property->code_postal }}
                             </td>
                         </tr>
 
                     </table>
-                  
+
                 </div>
                 <div class="col-4">
-                   <h2>Spécificités</h2>
-                   <ul class="list-group">
-                    @foreach ($property->options as $option )
-                        <li class="list-group-item">{{ $option->name }}</li>
-                        
-                    @endforeach
-                   </ul>
+                    <h2>Spécificités</h2>
+                    <ul class="list-group">
+                        @foreach ($property->options as $option)
+                            <li class="list-group-item ">{{ $option->name }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>

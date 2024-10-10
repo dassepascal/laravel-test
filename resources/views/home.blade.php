@@ -14,6 +14,7 @@
 
 <div class="container"> 
     <h2>Nos derniers biens</h2>
+    {{-- TODO : signaler  les biens  vendu   --}}
     <div class="row">
         @foreach ($properties as $property )
         <div class="col">

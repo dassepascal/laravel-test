@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use Illuminate\Http\Request;
+use App\Mail\PropertyContactMail;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\SearchPropertyRequest;
+use App\Http\Requests\PropertyContactRequest;
 
 class PropertyController extends Controller
 {
     public function index(SearchPropertyRequest $request)
     {
-
+// TODO  overloading avec with('options')
         $query = Property::query()->orderBy('created_at', 'desc')->with('options');
         if ($price = $request->validated('price')) {
             $query =   $query->where('price', '<=', $price);
@@ -44,5 +47,15 @@ class PropertyController extends Controller
         return view('properties.show', [
             'property' => $property
         ]);
+    }
+
+    public function contact (Property $property, PropertyContactRequest  $request)
+     {
+
+        Mail::send(new PropertyContactMail($property, $request->validated()));
+
+        return back()->with('success', 'Message envoyé avec succès');
+
+        
     }
 }

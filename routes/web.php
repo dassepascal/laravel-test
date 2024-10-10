@@ -28,6 +28,8 @@ Route::get('/biens/{slug}-{property}', [PropertyController::class, 'show'])->nam
     'slug' => $slugRegex
 ]);
 
+Route::post('/biens/{property}/contact', [PropertyController::class, 'contact'])->name('property.contact')->where('property', $idRedex); 
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('property', AdminPropertyController::class)->except(['show']);
