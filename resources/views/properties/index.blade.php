@@ -13,7 +13,7 @@
                         <input type="number" placeholder="Surface min " class="form-control" name="surface"
                             value="{{ $input['surface'] ?? '' }}">
                     </div>
-                    <div class="col m-2"> <input type="number" placeholder="Nombre de pieces min " class="form-control"
+                    <div class="col m-2"> <input type="number" placeholder="Nb de pieces min " class="form-control"
                             name="rooms" value="{{ $input['rooms'] ?? '' }}"></div>
                     <div class="col m-2"> <input type="number" placeholder="Budget max " class="form-control"
                             name="price" value="{{ $input['price'] ?? '' }}"></div>
@@ -31,11 +31,14 @@
 
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4  g-2 g-lg-3">
-            @foreach ($properties as $property)
+            @forelse ($properties as $property)
                 <div class="col mb-4">
                     @include('properties.card')
                 </div>
-            @endforeach
+
+            @empty
+                <div class="alert alert-danger">Aucun biens</div>
+            @endforelse
         </div>
         <div class="my-4">
             {{ $properties->links() }}

@@ -25,14 +25,24 @@ class PropertyController extends Controller
 
             $query = $query->where('title', 'like', "%{$title}%");
         }
-        $properties = Property::paginate(16);
+        $properties = Property::paginate(8);
         return view('properties.index', [
-            'properties' => $query->paginate(16),
-            'input'=> $request->validated()
+            'properties' => $query->paginate(8),
+            'input' => $request->validated()
         ]);
     }
 
-    public function show(Property $property){
-        return view('properties.show', compact('property'));
+    public function show(string $slug, Property $property)
+    {
+      
+        $expectedSlug = $property->getSlug();
+        
+        if ($slug !== $expectedSlug) {
+          
+            return to_route('property.show', ['slug' =>$expectedSlug, 'property' => $property]);
+        }
+        return view('properties.show', [
+            'property' => $property
+        ]);
     }
 }
