@@ -63,7 +63,7 @@
             </form>
         </div>
         <div class="mt-4">
-            // TODO {{-- si on fait confiance à l'utilisateur on peut encadrer le texte avec !! :  <p>{{ !! nl2br($property->description) !! }}</p> --}}
+           {{-- si on fait confiance à l'utilisateur on peut encadrer le texte avec !! :  <p>{{ !! nl2br($property->description) !! }}</p> --}}
 
             <p>{{ nl2br($property->description) }}</p>
             <div class="row">
