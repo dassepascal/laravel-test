@@ -9,3 +9,60 @@ creation de larelation entre la table property et option relation many_to_many
 php artisan make:migration CreateOptionPropertyTable
 
 
+Authentification 
+
+ajout du middleware dans route
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::resource('property', AdminPropertyController::class)->except(['show']);
+    Route::resource('option', OptionController::class)->except(['show']);
+});
+
+
+Authentification
+
+button deconnecter seulement dans la parti admin.blade.php
+
+
+Dans Kernel
+element "Guest" il faut être deconnecté si on veut acceder à l'élément:
+Route::get('/login',[AuthController::class, 'login'])
+->middleware('guest')
+->name('login');
+Route::post('/login', [AuthController::class, 'doLogin'])->name('doLogin');
+Route::delete('/logout', [AuthController::class, 'logout'])
+->middleware('auth')
+->name('logout');
+
+modification du redirect dans RouteServiceProvider : 
+
+public const HOME = '/'; au lieu de  public const HOME = '/home';
+
+
+
+image dans admin controller
+public function store(PropertyFormRequest $request)
+    {
+       
+        $property = Property::create($request->validated());
+        $property->options()->sync($request->input('options'));
+        $property->attachFiles($request->validated('pictures'));
+        return to_route('admin.property.index')->with('success', 'Le bien a été ajouté avec succés');
+        
+    }
+
+
+
+
+
+affichage des images : php artisan storage:link plus dans .env =  APP_URL=http://localhost:8000
+
+
+on desire afficher 1 seule image dans le card blade la premiere creation d'une methode dans property
+
+public function getPicture(): ?Picture
+    {
+        return $this->pictures[0] ?? null;
+    }
+
+suppression image utilisation de : https://htmx.org/
+

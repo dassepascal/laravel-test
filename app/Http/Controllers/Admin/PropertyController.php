@@ -15,8 +15,8 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        return view('admin.properties.index',[
-            'properties' => Property::orderBy('created_at','desc')->paginate(25),
+        return view('admin.properties.index', [
+            'properties' => Property::orderBy('created_at', 'desc')->paginate(25),
         ]);
     }
 
@@ -26,21 +26,21 @@ class PropertyController extends Controller
     public function create()
     {
         $property = new Property();
-     
+
         $property->fill([
             'surface' => 40,
-            'rooms'=> 4,
-            'bedrooms '=>1,
-            'floor'=> 0,
-            'city'=>'Montpeliers',
-            'code_postal'=> 34000,
-            'sold'=> false,
-          
+            'rooms' => 4,
+            'bedrooms ' => 1,
+            'floor' => 0,
+            'city' => 'Montpeliers',
+            'code_postal' => 34000,
+            'sold' => false,
+
         ]);
-      
-        return view('admin.properties.form',[
+
+        return view('admin.properties.form', [
             'property' =>  $property,
-            'options'=> Option::pluck('name','id')
+            'options' => Option::pluck('name', 'id')
         ]);
     }
 
@@ -49,14 +49,19 @@ class PropertyController extends Controller
      */
     public function store(PropertyFormRequest $request)
     {
-       
+
         $property = Property::create($request->validated());
         $property->options()->sync($request->input('options'));
-        return to_route('admin.property.index')->with('success', 'Le bien a été ajouté avec succés');
+        if($request->hasFile('pictures'))
+        {
+            $files = $request->file('pictures');
+            $property->attachFiles($files);
+        }
         
+        return to_route('admin.property.index')->with('success', 'Le bien a été ajouté avec succés');
     }
 
-   
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -64,9 +69,8 @@ class PropertyController extends Controller
     {
         return view('admin.properties.form', [
             'property' => $property,
-             'options'=> Option::pluck('name','id')
+            'options' => Option::pluck('name', 'id')
         ]);
-      
     }
 
     /**
@@ -74,8 +78,13 @@ class PropertyController extends Controller
      */
     public function update(PropertyFormRequest $request, Property $property)
     {
+              
         $property->update($request->validated());
-          $property->options()->sync($request->input('options', []));
+        $property->options()->sync($request->input('options', []));
+        if ($request->hasFile('pictures')) {
+            $files = $request->file('pictures');
+            $property->attachFiles($files);
+        }
         return to_route('admin.property.index')->with('success', 'Le bien a été mis à jour avec succés');
     }
 

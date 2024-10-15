@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Option;
+use App\Models\Picture;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,16 +14,17 @@ class Property extends Model
 
     protected $fillable = [
         'title',
-         'description',
-        'surface'  ,
-        'rooms' ,
+        'description',
+        'surface',
+        'rooms',
         'bedrooms',
-        'floor' ,
-        'price' ,
-        'city' ,
-        'address' ,
-        'postal_code' ,
-        'sold' ,
+        'floor',
+        'price',
+        'city',
+        'address',
+        'postal_code',
+        'sold',
+
 
     ];
     /**
@@ -39,7 +41,44 @@ class Property extends Model
      * @return string
      */
 
-    public function getSlug(){
+    public function getSlug()
+    {
         return Str::slug($this->title);
+    }
+
+    public function pictures()
+    {
+        return $this->hasMany(Picture::class);
+    }
+
+    /**
+     * Attach the given files to the property.
+     *
+     * 
+     * 
+     */
+    public function attachFiles(array $files)
+    {
+        if (!is_array($files)) {
+            throw new \InvalidArgumentException('Les fichiers doivent être fournis sous forme de tableau.');
+        }
+        $pictures = [];
+        foreach ($files as $file) {
+            if ($file->getError()) {
+                continue;
+            }
+            $filename = $file->store('properties/' . $this->id, 'public');
+            $pictures[] = [
+                'filename' => $filename
+            ];
+        }
+        if (count($pictures) > 0) {
+            $this->pictures()->createMany($pictures);
+        }
+    }
+
+    public function getPicture(): ?Picture
+    {
+        return $this->pictures[0] ?? null;
     }
 }
