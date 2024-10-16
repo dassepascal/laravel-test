@@ -66,3 +66,23 @@ public function getPicture(): ?Picture
 
 suppression image utilisation de : https://htmx.org/
 
+
+
+suppression des images dans le mode admin liste des biens
+
+ public function destroy(Property $property)
+    {
+        Picture::destroy($property->pictures()->pluck('id'));
+      
+        $property->delete();
+        return to_route('admin.property.index')->with('success', 'Le bien a été supprimé avec succés');
+    }
+
+
+redimenssionner les images
+
+composer require spatie/laravel-glide
+
+definir une route 
+
+

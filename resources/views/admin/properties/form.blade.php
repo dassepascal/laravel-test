@@ -112,8 +112,18 @@
                     'name' => 'sold',
                     'value' => $property->sold,
                 ])
+                 <div>
+            <button class="btn btn-primary">
+                @if ($property->exists)
+                    Modifier
+                @else
+                    Creer
+                @endif
+
+            </button>
+        </div>
             </div>
-                <div class="col-sm-3 bg-primary vstack gap-3" >
+                <div class="col-sm-3  vstack gap-3" >
                     @foreach ($property->pictures as $picture)  
 
                         <div id="picture-{{ $picture->id }}" class="position-relative">                  
@@ -139,15 +149,6 @@
             
         </div>
 
-        <div>
-            <button class="btn btn-primary">
-                @if ($property->exists)
-                    Modifier
-                @else
-                    Creer
-                @endif
-
-            </button>
-        </div>
+       
     </form>
 @endsection

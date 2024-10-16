@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\PictureController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\Admin\OptionController;
+use App\Http\Controllers\Admin\PictureController;
 use App\Http\Controllers\Admin\PropertyController as AdminPropertyController;
 
 
@@ -39,6 +40,8 @@ Route::post('/login', [AuthController::class, 'doLogin'])->name('doLogin');
 Route::delete('/logout', [AuthController::class, 'logout'])
 ->middleware('auth')
 ->name('logout');
+
+Route::get('/image/{path}',[ImageController::class, 'show'])->where('path','.*');
 
 
 
