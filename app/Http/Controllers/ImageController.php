@@ -3,24 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use League\Glide\ServerFactory;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use League\Glide\Responses\LaravelResponseFactory;
-
 
 class ImageController extends Controller
 {
-    public function show(Request $request, string $path)
+    public function show(Request $request,Filesystem $filesystem, string $path): Response
     {
-        $server = ServerFactory::create([
+
+      $server =  ServerFactory::create([
             'response' => new LaravelResponseFactory($request),
-            'source' => Storage::disk('public'),
-            'cache' => Storage::disk('local'),
+            'source'=>$filesystem->getDriver(),
+            'cache'=> $filesystem->getDriver(),
             'cache_path_prefix' => '.cache',
-            'base_url' => 'images',
-
-
+            'base_url' => 'images'
         ]);
+
         return $server->getImageResponse($path, $request->all());
+ 
+       
+        
     }
 }
