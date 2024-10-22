@@ -41,8 +41,8 @@ Route::delete('/logout', [AuthController::class, 'logout'])
 ->middleware('auth')
 ->name('logout');
 
-Route::get('/images/{path}',[ImageController::class, 'show']);;
-//Route::get('/image/{path}', [ImageController::class, 'show'])->where('path', '.*');
+// Route::get('/images/{path}',[ImageController::class, 'show']);
+Route::get('/image/{path}', [ImageController::class, 'show'])->where('path', '.*');
 
 
 
