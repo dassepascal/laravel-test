@@ -56,6 +56,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () us
 });
 
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });

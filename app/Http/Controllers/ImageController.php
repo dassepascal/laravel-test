@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Psr7\Stream;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use League\Glide\ServerFactory;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use League\Glide\Responses\LaravelResponseFactory;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ImageController extends Controller
 {
-    public function show(Request $request,Filesystem $filesystem, string $path): Response
+    public function show(Request $request,Filesystem $filesystem, string $path): StreamedResponse
     {
 
       $server =  ServerFactory::create([
@@ -23,7 +25,6 @@ class ImageController extends Controller
 
         return $server->getImageResponse($path, $request->all());
  
-       
-        
+               
     }
 }
