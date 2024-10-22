@@ -4,10 +4,10 @@
     <div class="bg-light p-5 mb-5 text-center">
         <div class="container">
             <h1>Agence Lorem ipsum</h1>
-            <div class="flex">
+            {{-- <div class="flex">
                 <img src="{{ image('eau.webp',400,200) }}" alt="">
               
-            </div>
+            </div> --}}
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem at vitae quos accusamus doloremque explicabo
                 dolorem sit eligendi in dolores id voluptate tenetur esse omnis, dolorum voluptatibus laborum, mollitia
                 architecto!</p>

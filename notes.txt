@@ -79,6 +79,8 @@ suppression des images dans le mode admin liste des biens
     }
 
 
+images : creation du fichier la table picture parce que l'on genere plusieurs image on crée un relation 1->n 
+
 redimenssionner les images
 
 composer require spatie/laravel-glide

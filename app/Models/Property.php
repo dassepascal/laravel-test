@@ -52,9 +52,8 @@ class Property extends Model
     }
 
     /**
-     * Attach the given files to the property.
-     *
-     * 
+     * @param UploadFile[] $files
+     *       
      * 
      */
     public function attachFiles(array $files)
