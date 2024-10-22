@@ -4,6 +4,21 @@
     --bs-btn-font-size: 0.875rem;
 }
 
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1) grayscale(100);
+}
+.carousel-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-item img {
+    max-width: 100%;
+    height: auto;
+}
+
 @media (min-width: 768px) {
     .btn-custom {
         --bs-btn-padding-y: 0.5rem;

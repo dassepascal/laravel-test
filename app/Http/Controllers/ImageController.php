@@ -16,7 +16,7 @@ class ImageController extends Controller
     public function show(Request $request,Filesystem $filesystem, string $path): StreamedResponse
     {
 
-        dd($path);
+       
       $server =  ServerFactory::create([
         // dd($request->all()),
             'response' => new LaravelResponseFactory($request),

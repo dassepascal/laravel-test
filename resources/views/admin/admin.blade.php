@@ -28,6 +28,13 @@
         .htmx-indicator{
             display: none;  
         }
+
+        .htmx-request .htmx-indicator{
+            display: inline-block;
+        }
+          .htmx-request .htmx-indicator{
+            display: inline-block;
+        }
         </style>
 </head>
 

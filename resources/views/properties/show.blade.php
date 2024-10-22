@@ -8,11 +8,11 @@
         <div class="row">
             <div class="col-8">
 
-                <div id="carousel" class="carousel slide" data-bs-ride="carousel" style="max-width: 800px;">
+                <div id="carousel" class="carousel slide" data-bs-ride="carousel" style="max-width: 500px;">
                     <div class="carousel-inner">
                         @foreach($property->pictures as $k => $picture)
                             <div class="carousel-item {{ $k === 0 ? 'active' : '' }}">
-                                <img src="{{ $picture->getImageUrl() }}" alt="">
+                                <img src="{{ $picture->getImageUrl(600,500) }}" alt="">
                             </div>
                         @endforeach
                     </div>
