@@ -14,7 +14,7 @@ class PropertyController extends Controller
     public function index(SearchPropertyRequest $request)
     {
 // TODO  overloading avec with('options')
-        $query = Property::query()->orderBy('created_at', 'desc')->with('options');
+        $query = Property::query()->with('pictures')->orderBy('created_at', 'desc')->with('options');
         if ($price = $request->validated('price')) {
             $query =   $query->where('price', '<=', $price);
         }

@@ -9,12 +9,17 @@ use League\Glide\ServerFactory;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use League\Glide\Responses\LaravelResponseFactory;
+use League\Glide\Signatures\SignatureFactory;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ImageController extends Controller
 {
     public function show(Request $request,Filesystem $filesystem, string $path): StreamedResponse
     {
+        SignatureFactory::create(config('glide.key'))->validateRequest(
+            $request->path(),
+            $request->all()
+        );
 
        
       $server =  ServerFactory::create([

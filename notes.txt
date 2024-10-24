@@ -88,3 +88,42 @@ composer require spatie/laravel-glide
 definir une route 
 
 
+Route::get('/images/{path}', [ImageController::class, 'show'])->where('path', '.*');
+
+le controller: ImageController 
+
+
+Securite: 
+dans .env on cree GLIDE_KEY: MOT DE PASSE   
+dans config : on cree un fichier glide.php
+dans tout ce qui est congiguration on se contente de mettre un tableau
+
+<?php 
+return [
+    'key' => env('GLIDE_KEY'),
+];
+
+
+dans le fichier ImageController 
+  public function show(Request $request,Filesystem $filesystem, string $path): StreamedResponse
+    {
+        SignatureFactory::create(config('glide.key'))->validateRequest(
+            $request->path(),
+            $request->all()
+        );
+.....}
+
+description: on lui dit trouve l'index key dans le fichier de configuration glide.php   on lui demand eest ce que tu peux valider les parametres
+
+afin d'éviter les requétes overloading ajout de with('pictures')  dans les fichiers HomrController + PropertyController
+
+public function index(){
+        $properties = Property::with('pictures')->orderBy('created_at','desc')->limit(4)->get();
+        return view('home',[
+            'properties' => $properties
+        ]);
+    }    
+
+
+ $query = Property::query()->with('pictures')->orderBy('created_at', 'desc')->with('options');
+
